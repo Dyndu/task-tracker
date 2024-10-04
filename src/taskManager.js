@@ -5,7 +5,12 @@ const tasksFilePath = path.join(__dirname, '../data/tasks.json');
 
 const loadTasks = () => {
     if (fs.existsSync(tasksFilePath)) {
-        return fs.readJsonSync(tasksFilePath);
+        try {
+            return fs.readJsonSync(tasksFilePath);
+        } catch (err) {
+            console.error('Error reading tasks file:', err);
+            return [];
+        }
     }
     return [];
 };
