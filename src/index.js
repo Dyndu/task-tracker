@@ -11,10 +11,17 @@ program
     });
 
 program
-    .command('list')
-    .description('List all tasks')
-    .action(() => {
-        taskManager.listTasks();
+    .command('update <taskId> <newDescription>')
+    .description('Update a task')
+    .action((taskId, newDescription) => {
+        taskManager.updateTask(taskId, newDescription);
+    });
+
+program
+    .command('list [status]')
+    .description('List all tasks or tasks with a specific status')
+    .action((status) => {
+        taskManager.listTasks(status);
     });
 
 program
@@ -22,6 +29,13 @@ program
     .description('Mark a task as done')
     .action((taskId) => {
         taskManager.markTaskAsDone(taskId);
+    });
+
+program
+    .command('in-progress <taskId>')
+    .description('Mark a task as in progress')
+    .action((taskId) => {
+        taskManager.markTaskAsInProgress(taskId);
     });
 
 program
