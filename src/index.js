@@ -1,20 +1,14 @@
 const { Command } = require('commander');
-const taskManager = require('./taskManager');
+const TaskManager = require('./taskManager');
 
 const program = new Command();
+const taskManager = new TaskManager();
 
 program
-    .command('add <task>')
+    .command('add <description>')
     .description('Add a new task')
-    .action((task) => {
-        taskManager.addTask(task);
-    });
-
-program
-    .command('update <taskId> <newDescription>')
-    .description('Update a task')
-    .action((taskId, newDescription) => {
-        taskManager.updateTask(taskId, newDescription);
+    .action((description) => {
+        taskManager.addTask(description);
     });
 
 program
@@ -25,14 +19,14 @@ program
     });
 
 program
-    .command('mark-done <taskId>')
+    .command('done <taskId>')
     .description('Mark a task as done')
     .action((taskId) => {
         taskManager.markTaskAsDone(taskId);
     });
 
 program
-    .command('mark-in-progress <taskId>')
+    .command('in-progress <taskId>')
     .description('Mark a task as in progress')
     .action((taskId) => {
         taskManager.markTaskAsInProgress(taskId);
@@ -43,6 +37,13 @@ program
     .description('Delete a task')
     .action((taskId) => {
         taskManager.deleteTask(taskId);
+    });
+
+program
+    .command('update <taskId> <newDescription>')
+    .description('Update a task')
+    .action((taskId, newDescription) => {
+        taskManager.updateTask(taskId, newDescription);
     });
 
 program.parse(process.argv);
