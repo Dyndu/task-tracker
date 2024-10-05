@@ -25,14 +25,14 @@ program
     });
 
 program
-    .command('done <taskId>')
+    .command('mark-done <taskId>')
     .description('Mark a task as done')
     .action((taskId) => {
         taskManager.markTaskAsDone(taskId);
     });
 
 program
-    .command('in-progress <taskId>')
+    .command('mark-in-progress <taskId>')
     .description('Mark a task as in progress')
     .action((taskId) => {
         taskManager.markTaskAsInProgress(taskId);
